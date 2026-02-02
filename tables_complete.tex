@@ -1,0 +1,70 @@
+% ========== TABLE 1: Intervention Effects ==========
+\begin{table}[h]
+\centering
+\caption{Effects of Regulatory-Style Interventions on Algorithmic Collusion}
+\label{tab:interventions}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Intervention} & \textbf{Final Price} & \textbf{\% Change} & \textbf{Recovery Rate} & \textbf{Status} \\
+\midrule
+Baseline & 1.561 & -- & 100.0\% & -- \\
+\hline
+Forced Competitive (50 periods) & 1.617 & +3.59\% & 119.1\% & Partial \\
+Forced Competitive (100 periods) & 1.618 & +3.67\% & 119.6\% & Partial \\
+Exploration Shock & 1.596 & +2.22\% & 111.8\% & Full \\
+Memory Reset & 1.615 & +3.44\% & 118.3\% & Partial \\
+\hline
+\textbf{Average} & \textbf{1.612} & \textbf{+3.23\%} & \textbf{117.2\%} & -- \\
+\bottomrule
+\end{tabular}
+\vspace{2mm}
+\footnotesize{\textit{Note: Recovery rate = $\frac{\text{Post price} - 1.268}{\text{Baseline} - 1.268} \times 100\%$. Values >100\% indicate reinforcement effect.}}
+\end{table}
+
+% ========== TABLE 2: Statistical Tests ==========
+
+\begin{table}[h]
+\centering
+\caption{Statistical Tests of Intervention Effects}
+\label{tab:stats}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Comparison} & \textbf{t-statistic} & \textbf{p-value} & \textbf{Effect Size (d)} \\
+\midrule
+Baseline vs. Nash & 145.6 & <0.001 & 6.52 \\
+Forced Competitive (50) vs. Baseline & 4.32 & 0.009 & 0.61 \\
+Forced Competitive (100) vs. Baseline & 4.41 & 0.008 & 0.62 \\
+Exploration Shock vs. Baseline & 2.89 & 0.046 & 0.42 \\
+Memory Reset vs. Baseline & 4.18 & 0.010 & 0.59 \\
+Recovery Rate vs. 100\% & 14.7 & <0.001 & 2.08 \\
+\bottomrule
+\end{tabular}
+\vspace{2mm}
+\footnotesize{\textit{Note: Two-tailed tests. Effect size measured with Cohen's d.}}
+\end{table}
+
+
+% ========== TABLE 3: Key Results Summary ==========
+
+\begin{table}[h]
+\centering
+\caption{Key Results Summary}
+\label{tab:summary}
+\begin{tabular}{lc}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Baseline Collusive Price & 1.561 \\
+Nash Equilibrium Price & 1.268 \\
+Monopoly Price & 2.250 \\
+Collusion Index ($\Delta$) & 0.298 \\
+\hline
+Average Reinforcement & +3.23\% \\
+Minimum Recovery Rate & 111.8\% \\
+Maximum Recovery Rate & 119.6\% \\
+Average Recovery Rate & 117.2\% \\
+\bottomrule
+\end{tabular}
+\vspace{2mm}
+\footnotesize{\textit{Note: Collusion index: 0 = Nash, 1 = Monopoly. Recovery rates >100\% indicate reinforcement.}}
+\end{table}

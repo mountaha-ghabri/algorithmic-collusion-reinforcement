@@ -1,0 +1,62 @@
+\section{Background}
+
+\subsection{Bertrand Competition with Differentiated Products}
+
+We study repeated price competition between firms producing differentiated goods. In the static Bertrand model with differentiated products, each firm $i$ chooses price $p_i$ to maximize profit $\pi_i(p_i, p_{-i}) = (p_i - c_i)q_i(p_i, p_{-i})$, where $c_i$ is marginal cost and $q_i(\cdot)$ is the demand function. The Nash equilibrium occurs when each firm's price is a best response to competitors' prices.
+
+Following Calvano et al. (2020), we use a logit demand specification where consumer utility for product $i$ is:
+\begin{equation}
+u_i = a_i - p_i + \epsilon_i
+\end{equation}
+with $\epsilon_i$ following a Type I extreme value distribution. This yields market shares:
+\begin{equation}
+q_i = \frac{\exp((a_i - p_i)/\mu)}{\sum_j \exp((a_j - p_j)/\mu) + \exp(a_0/\mu)}
+\end{equation}
+where $\mu > 0$ measures horizontal differentiation and $a_0$ represents an outside option.
+
+In repeated interaction, the competitive benchmark is the static Nash equilibrium price $p^N$, while the collusive benchmark is the joint-profit maximizing (monopoly) price $p^M$. Following standard parameterization from Calvano et al. (2020), we set $c_i = 1$, $a_i - c_i = 1$, $a_0 = 0$, and $\mu = 0.25$, yielding theoretical benchmarks $p^N \approx 1.47$ and $p^M \approx 1.94$ for the continuous case.
+
+\subsection{Q-Learning in Repeated Games}
+
+Q-learning is a model-free reinforcement learning algorithm where agents learn action-value estimates through experience~\cite{watkins1992qlearning}. Each agent $i$ maintains a Q-function $Q_i(s, a)$ representing the expected discounted return from taking action $a$ in state $s$ and following an optimal policy thereafter.
+
+The Q-update rule is:
+\begin{equation}
+Q_{i,t+1}(s_t, a_{i,t}) = (1-\alpha)Q_{i,t}(s_t, a_{i,t}) + \alpha\left[r_{i,t} + \gamma \max_{a'} Q_{i,t}(s_{t+1}, a')\right]
+\end{equation}
+where $\alpha \in (0,1]$ is the learning rate, $\gamma \in [0,1)$ is the discount factor, and $r_{i,t}$ is the immediate reward.
+
+In independent Q-learning, each agent treats other agents as part of the environment and updates its Q-values based on observed rewards without modeling opponents' strategies explicitly. Despite this simplicity, Calvano et al. (2020) showed that independent Q-learners can converge to collusive outcomes in repeated pricing games.
+
+\subsection{Tacit Collusion Metrics}
+
+Following the literature on algorithmic collusion, we measure collusion strength using:
+
+\subsubsection{Collusion Index}
+\begin{equation}
+\Delta = \frac{\bar{p} - p^N}{p^M - p^N}
+\end{equation}
+where $\bar{p}$ is the average observed price, $p^N$ is the static Nash equilibrium price, and $p^M$ is the monopoly price. $\Delta = 0$ indicates competitive pricing, $\Delta = 1$ indicates perfect collusion, and intermediate values indicate partial collusion.
+
+\subsubsection{Price Stability}
+Collusion typically manifests as stable, supra-competitive prices over extended periods. We measure price stability through:
+\begin{itemize}
+    \item Standard deviation of prices in the stable phase
+    \item Correlation between firms' prices (higher correlation suggests coordination)
+    \item Persistence over time (resistance to deviations)
+\end{itemize}
+
+\subsubsection{Recovery Metrics}
+After interventions, we measure:
+\begin{equation}
+\text{Recovery Rate} = \frac{\bar{p}_{\text{post}} - p^N}{\bar{p}_{\text{baseline}} - p^N} \times 100\%
+\end{equation}
+where $\bar{p}_{\text{post}}$ is the average post-intervention price and $\bar{p}_{\text{baseline}}$ is the baseline collusive price. Values >100\% indicate reinforcement (stronger collusion after intervention).
+
+\subsection{Theoretical Foundations}
+
+The folk theorem for repeated games suggests that collusive outcomes can be sustained as subgame-perfect equilibria when players are sufficiently patient (high discount factor $\delta$) and can punish deviations~\cite{mas1995microeconomic}. In algorithmic settings, this translates to learning dynamics that discover and reinforce profitable cooperative strategies.
+
+However, as Sutton and Barto (2018) note, convergence properties of Q-learning depend critically on exploration strategies and environmental stationarity~\cite{sutton2018reinforcement}. In multi-agent settings, the non-stationarity introduced by simultaneous learning can complicate convergence but does not preclude coordination.
+
+Our study extends these foundations by examining whether learned collusion, once established, remains stable under various disruptions that simulate regulatory interventions, a question not addressed in prior theoretical or empirical work.

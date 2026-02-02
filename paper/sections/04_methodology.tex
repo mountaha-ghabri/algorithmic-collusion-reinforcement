@@ -1,0 +1,152 @@
+\section{Methodology}
+
+\subsection{Experimental Approach}
+
+We adopt a controlled simulation methodology that enables systematic analysis of collusion stability under interventions that are difficult to observe empirically due to data limitations and legal constraints. Our approach follows Calvano et al. (2020) for baseline conditions and extends it with systematic intervention tests.
+
+\subsection{Economic Environment}
+
+\subsubsection{Market Structure}
+We study repeated Bertrand price competition between $n=2$ symmetric firms producing differentiated products. The discrete-time infinite horizon game proceeds as follows:
+\begin{enumerate}
+    \item In each period $t$, firms simultaneously choose prices $p_{1,t}, p_{2,t}$ from a discrete grid
+    \item Consumers make purchasing decisions based on logit demand
+    \item Firms receive profits $\pi_{i,t} = (p_{i,t} - c)q_{i,t}$
+    \item Agents update pricing strategies based on observed outcomes
+\end{enumerate}
+
+\subsubsection{Demand Specification}
+Consumer demand follows the logit model as in Calvano et al. (2020):
+\begin{equation}
+q_{i,t} = \frac{\exp((a - p_{i,t})/\mu)}{\sum_{j=1}^{2} \exp((a - p_{j,t})/\mu) + \exp(a_0/\mu)}
+\end{equation}
+where $a$ is product quality, $c$ is marginal cost, $\mu$ captures horizontal differentiation, and $a_0$ represents the outside option.
+
+\subsubsection{Parameter Values}
+Following the established literature, we set:
+\begin{itemize}
+    \item Marginal cost: $c = 1.0$
+    \item Quality differential: $a - c = 1.0$ (so $a = 2.0$)
+    \item Outside option quality: $a_0 = 0$
+    \item Differentiation parameter: $\mu = 0.25$
+    \item Discount factor: $\delta = 0.95$
+\end{itemize}
+These parameters yield theoretical benchmarks: Bertrand-Nash price $p^N \approx 1.47$ and monopoly price $p^M \approx 1.94$ in the continuous case.
+
+\subsubsection{Price Discretization}
+The continuous price space is discretized into $m=15$ equally spaced points in the interval $[1.2, 2.0]$, following Calvano et al. (2020). This range brackets both competitive and collusive price levels while maintaining computational tractability.
+
+\subsection{Q-Learning Agents}
+
+\subsubsection{State Representation}
+Agents employ bounded memory of length $k=1$, such that the state at time $t$ is defined as:
+\begin{equation}
+s_t = \{p_{1,t-1}, p_{2,t-1}\}
+\end{equation}
+This yields a state space of size $|S| = m^2 = 225$ in the duopoly case. One-period memory combined with action choices can effectively implement longer-horizon strategies through learned responses.
+
+\subsubsection{Learning Algorithm}
+Each agent $i$ maintains a Q-function $Q_i(s,a)$ updated according to the standard Q-learning rule:
+\begin{equation}
+Q_{i,t+1}(s_t, a_{i,t}) = (1-\alpha)Q_{i,t}(s_t, a_{i,t}) + \alpha\left[\pi_{i,t} + \delta \max_{a'} Q_{i,t}(s_{t+1}, a')\right]
+\end{equation}
+where:
+\begin{itemize}
+    \item $\alpha = 0.15$ is the learning rate (following Calvano et al.)
+    \item $\delta = 0.95$ is the discount factor
+    \item $\pi_{i,t}$ is period profit
+    \item $s_{t+1}$ is the next state (prices chosen in period $t$)
+\end{itemize}
+
+\subsubsection{Exploration Strategy}
+Agents follow an $\epsilon$-greedy exploration strategy with time-declining exploration rate:
+\begin{equation}
+\epsilon_t = \epsilon_{\min} + (\epsilon_{\max} - \epsilon_{\min}) \cdot \exp(-\beta t)
+\end{equation}
+where $\epsilon_{\max} = 1.0$, $\epsilon_{\min} = 0.001$, and $\beta = 5 \times 10^{-6}$. This satisfies the Greedy in the Limit with Infinite Exploration (GLIE) condition required for convergence of Q-learning.
+
+\subsubsection{Initialization}
+Q-values are initialized to expected discounted profits under the assumption that the opponent randomizes uniformly over all prices:
+\begin{equation}
+Q_{i,0}(s, a_i) = \frac{\sum_{a_{-i}} \pi_i(s, a_i, a_{-i})}{(1-\delta) \cdot m}
+\end{equation}
+This reflects initial uncertainty regarding the opponent's strategy while providing reasonable starting values.
+
+\subsection{Training Protocol}
+
+\subsubsection{Convergence Criterion}
+Agents are trained until convergence, defined as:
+\begin{enumerate}
+    \item The greedy policy (argmax of Q-values) remains unchanged across all states for 100,000 consecutive periods, OR
+    \item A maximum of $10^6$ training periods is reached
+\end{enumerate}
+This ensures stable learning outcomes while maintaining computational feasibility.
+
+\subsubsection{Session Structure}
+Each experiment consists of 50 independent training sessions with different random seeds. Reported results correspond to means and standard errors across these sessions, providing statistical robustness.
+
+\subsection{Baseline Experiment}
+
+We first replicate the baseline environment of Calvano et al. (2020) to verify the emergence of algorithmic collusion. The primary outcome measure is the collusion index:
+\begin{equation}
+\Delta = \frac{\bar{\pi} - \pi^N}{\pi^M - \pi^N}
+\end{equation}
+where $\bar{\pi}$ is average profit, $\pi^N$ is Nash equilibrium profit, and $\pi^M$ is monopoly profit. Equivalently, we report average prices relative to theoretical benchmarks.
+
+\subsection{Intervention Experiments}
+
+After agents converge to collusive pricing, we apply four intervention types to test stability:
+
+\subsubsection{Forced Competitive Pricing}
+One agent is forced to price at the static best-response level (approximating Nash equilibrium) for $k$ periods, with $k \in \{50, 100\}$. This simulates regulatory fines or mandatory price reductions.
+
+\subsubsection{Exploration Shocks}
+Exploration rates are temporarily increased to $\epsilon = 0.5$ for 100 periods, simulating heightened market uncertainty or regulatory audits that increase algorithmic randomness.
+
+\subsubsection{Memory Reset}
+One agent's Q-table is reset to initial values while the other retains learned values. This simulates partial algorithmic updates or heterogeneous implementation of regulatory requirements.
+
+\subsubsection{Intervention Protocol}
+For each intervention:
+\begin{enumerate}
+    \item Run baseline training until convergence (establish collusion)
+    \item Apply intervention for specified duration
+    \item Resume normal learning for 100,000 periods (recovery phase)
+    \item Measure outcomes over final 20,000 periods
+\end{enumerate}
+
+\subsection{Outcome Measures}
+
+\subsubsection{Primary Outcomes}
+\begin{itemize}
+    \item \textbf{Final average price:} Mean price over final 20,000 periods
+    \item \textbf{Recovery rate:} $\frac{\bar{p}_{\text{post}} - p^N}{\bar{p}_{\text{baseline}} - p^N} \times 100\%$
+    \item \textbf{Recovery status:}
+    \begin{itemize}
+        \item \textit{Full recovery:} Final price within 5\% of baseline
+        \item \textit{Partial recovery:} Final price 10-50\% above Nash but not fully recovered
+        \item \textit{Permanent disruption:} Final price within 5\% of Nash
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Secondary Outcomes}
+\begin{itemize}
+    \item Price correlation between firms
+    \item Price variance in stable phase
+    \item Time to re-converge after intervention
+    \item Statistical significance of price differences
+\end{itemize}
+
+\subsection{Statistical Analysis}
+
+We conduct the following statistical tests:
+\begin{itemize}
+    \item \textbf{Paired t-tests:} Compare baseline prices to post-intervention prices
+    \item \textbf{One-sample t-tests:} Test whether recovery rates differ from 100\%
+    \item \textbf{Confidence intervals:} 95\% CIs for all reported metrics
+    \item \textbf{Sensitivity analysis:} Vary $\alpha \in [0.05, 0.25]$ and $\beta \in [10^{-6}, 10^{-4}]$
+\end{itemize}
+
+\subsection{Implementation Details}
+
+All simulations are implemented in Python 3.11 using NumPy for numerical computations. Random seeds are recorded to ensure reproducibility. Each 50-session experiment requires approximately 30 minutes on standard laptop hardware (Intel i7, 16GB RAM). Code is available upon request for replication purposes.

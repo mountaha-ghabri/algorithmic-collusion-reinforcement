@@ -1,0 +1,68 @@
+\begin{thebibliography}{12}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Abada et~al.(2023)Abada, Lambin, and T{\'o}th]{abada2023artificial}
+Ibrahim Abada, Xavier Lambin, and Bal{\'a}zs T{\'o}th.
+\newblock Artificial intelligence, algorithmic pricing, and tacit collusion: Evidence from simulations.
+\newblock \emph{Journal of Industrial Economics}, 71\penalty0 (2):\penalty0 355--390, 2023.
+
+\bibitem[Assad et~al.(2024)Assad, Clark, Ershov, and Xu]{assad2024algorithmic}
+Stephanie Assad, Robert Clark, Daniel Ershov, and Liting Xu.
+\newblock Algorithmic pricing and competition: Empirical evidence from the german retail gasoline market.
+\newblock \emph{Management Science}, 70\penalty0 (1):\penalty0 1--23, 2024.
+
+\bibitem[Baker(2021)]{baker2021algorithms}
+Jonathan~B Baker.
+\newblock Algorithms and tacit collusion: An antitrust analysis.
+\newblock \emph{Antitrust Law Journal}, 84:\penalty0 621--662, 2021.
+
+\bibitem[Calvano et~al.(2020)Calvano, Calzolari, Denicol{\`o}, and Pastorello]{calvano2020artificial}
+Emilio Calvano, Giacomo Calzolari, Vincenzo Denicol{\`o}, and Sergio Pastorello.
+\newblock Artificial intelligence, algorithmic pricing, and collusion.
+\newblock \emph{American Economic Review}, 110\penalty0 (10):\penalty0 3267--3297, 2020.
+
+\bibitem[Dafoe et~al.(2020)Dafoe, Bachrach, Hadfield, Horvitz, Larson, and Graepel]{dafoe2020open}
+Allan Dafoe, Yoram Bachrach, Gillian Hadfield, Eric Horvitz, Kate Larson, and Thore Graepel.
+\newblock Open problems in cooperative ai.
+\newblock \emph{arXiv preprint arXiv:2012.08630}, 2020.
+
+\bibitem[Ezrachi and Stucke(2016)]{ezrachi2016virtual}
+Ariel Ezrachi and Maurice~E Stucke.
+\newblock \emph{Virtual competition: The promise and perils of the algorithm-driven economy}.
+\newblock Harvard University Press, 2016.
+
+\bibitem[Klein(2021)]{klein2021autonomous}
+Timo Klein.
+\newblock Autonomous algorithmic collusion: Q-learning under sequential pricing.
+\newblock \emph{The RAND Journal of Economics}, 52\penalty0 (3):\penalty0 538--558, 2021.
+
+\bibitem[Leibo et~al.(2017)Leibo, Zambaldi, Lanctot, Marecki, and Graepel]{leibo2017multi}
+Joel~Z Leibo, Vinicius Zambaldi, Marc Lanctot, Janusz Marecki, and Thore Graepel.
+\newblock Multi-agent reinforcement learning in sequential social dilemmas.
+\newblock \emph{Proceedings of the 16th Conference on Autonomous Agents and MultiAgent Systems}, pages 464--473, 2017.
+
+\bibitem[Mas-Colell et~al.(1995)Mas-Colell, Whinston, and Green]{mas1995microeconomic}
+Andreu Mas-Colell, Michael~D Whinston, and Jerry~R Green.
+\newblock Microeconomic theory.
+\newblock \emph{New York: Oxford university press}, 1995.
+
+\bibitem[Mehra(2016)]{mehra2016antitrust}
+Salil~K Mehra.
+\newblock Antitrust and the roboseller: Competition in the time of algorithms.
+\newblock \emph{Minnesota Law Review}, 100:\penalty0 1323, 2016.
+
+\bibitem[Sutton and Barto(2018)]{sutton2018reinforcement}
+Richard~S Sutton and Andrew~G Barto.
+\newblock \emph{Reinforcement learning: An introduction}.
+\newblock MIT press, 2018.
+
+\bibitem[Watkins and Dayan(1992)]{watkins1992qlearning}
+Christopher~JCH Watkins and Peter Dayan.
+\newblock Q-learning.
+\newblock \emph{Machine learning}, 8:\penalty0 279--292, 1992.
+
+\end{thebibliography}

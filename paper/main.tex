@@ -1,0 +1,126 @@
+\documentclass[sigconf]{acmart}
+
+% ================= PACKAGES =================
+\usepackage{booktabs}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{threeparttable}
+\usepackage{tabularx}
+\usepackage{etoolbox}
+
+% Reduce bibliography spacing
+\AtBeginEnvironment{thebibliography}{%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{0pt}%
+}
+\renewcommand{\bibfont}{\large}
+
+% ================= HYPERLINKS =================
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    breaklinks=true
+}
+
+% ================= REMOVE ACM METADATA =================
+\settopmatter{printacmref=false, printfolios=true, printccs=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+
+\makeatletter
+\def\@copyrightspace{}
+\let\@acmBadgeR\@empty
+\let\@acmBadgeL\@empty
+\pagestyle{plain}
+\makeatother
+
+% ================= AUTHOR INFO (CLEAN) =================
+% Move author metadata out of class to avoid it appearing in headers.
+% We keep shortauthor/shorttitle safe definitions below.
+\AtBeginDocument{%
+    \providecommand{\shortauthors}{}%
+    \providecommand{\shorttitle}{}%
+}
+
+% ================= HEADERS/FOOTERS =================
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small The Collusion Reinforcement Paradox: When Regulatory Interventions Strengthen Algorithmic Tacit Collusion}%
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% Plain style for first page (no header)
+\fancypagestyle{plain}{%
+    \fancyhf{}%
+    \fancyfoot[C]{\thepage}%
+    \renewcommand{\headrulewidth}{0pt}%
+}
+
+\renewcommand{\sectionmark}[1]{}
+\renewcommand{\subsectionmark}[1]{}
+
+% Remove ACM copyright
+\setcopyright{none}
+\acmConference{}
+\acmYear{}
+\acmISBN{}
+\acmDOI{}
+
+% ================= DOCUMENT =================
+\begin{document}
+
+\title{The Collusion Reinforcement Paradox: When Regulatory Interventions Strengthen Algorithmic Tacit Collusion}
+
+\maketitle
+
+% Manually print author's info on the title page only (no class metadata)
+\begin{center}
+    \vspace{-1ex}
+    {\normalsize Montaha Ghabri}\\
+    {\small Master Business Analytics, Tunis Business School (TBS) -- Tunis (2025--2026)}\\
+    {\small Course: Advanced Decision and Game Theory. Supervisor: Dr. Sonia Rebai.}
+\end{center}
+
+% ================= ABSTRACT =================
+\begin{abstract}
+Independent reinforcement learning agents deployed in competitive markets can converge to tacitly collusive pricing strategies without explicit coordination. While prior work establishes the emergence of algorithmic collusion, its stability under regulatory intervention remains understudied. This paper investigates whether learned collusion can be disrupted through regulatory-style interventions in repeated Bertrand competition. We test four intervention types: forced competitive pricing (simulating fines), exploration shocks (simulating audits), memory resets (simulating algorithmic updates), and learning rate asymmetries. Contrary to expectations, all interventions not only failed to disrupt collusion but strengthened it. Independent Q-learning agents converged to prices 30\% above competitive levels (collusion index = 0.298, $p < 0.001$). Post-intervention prices increased by 2.2--3.7\% above baseline, with recovery rates consistently exceeding 110\% (range: 111.8--119.6\%, average: 117.2\%). This \textit{collusion reinforcement paradox} suggests algorithmic markets may exhibit anti-fragile properties where disruptions strengthen rather than weaken coordination. Our findings challenge conventional antitrust approaches and suggest the need for preventive rather than reactive regulation in increasingly automated markets.
+\end{abstract}
+
+\keywords{Algorithmic Collusion, Multi-Agent Reinforcement Learning, Q-Learning, Bertrand Competition, Antitrust Regulation, Tacit Coordination}
+ 
+
+% Add course footnote
+\footnotetext{This paper was prepared for the Advanced Decision and Game Theory course taught by Dr. Sonia Rebai at Tunis Business School (2025--2026).}
+
+% Ensure no short author appears in headers
+\renewcommand{\shortauthors}{}
+
+% First page: plain (no header)
+\thispagestyle{plain}
+
+% ================= SECTIONS =================
+\input{sections/01_introduction}
+\input{sections/02_related_work}
+\input{sections/03_background}
+\input{sections/04_methodology}
+\input{sections/05_results}
+\input{sections/06_discussion}
+\input{sections/07_conclusion}
+
+% ================= REFERENCES =================
+% Force the bibliography to single-column (full-width) and ensure a single
+% "References" heading (avoid duplicate headings).
+\clearpage
+\begingroup
+    \renewcommand{\bibsection}{\section*{References}\addcontentsline{toc}{section}{References}}%
+    \onecolumn
+    \bibliographystyle{plainnat}
+    \bibliography{references}
+\endgroup
+
+\end{document}
