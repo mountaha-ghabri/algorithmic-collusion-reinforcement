@@ -10,7 +10,7 @@
 
 Independent reinforcement learning agents deployed in competitive markets can converge to tacitly collusive pricing without explicit coordination. While the emergence of algorithmic collusion is well-documented, its **stability once learned** remains an open question of direct relevance to antitrust enforcement.
 
-This paper tests four regulatory-style interventions applied after Q-learning agents have converged to collusive pricing in a repeated Bertrand duopoly. Replicating Calvano et al. (2020), the baseline yields an equilibrium price of **1.887** and a Profit Gain Index of **Δ = 0.991**. All four interventions reduce equilibrium prices but do not restore competitive outcomes — recovery rates range from **54.5%** (forced pricing) to **81.8%** (memory reset).
+This paper tests four regulatory-style interventions applied after Q-learning agents have converged to collusive pricing in a repeated Bertrand duopoly. Replicating Calvano et al. (2020), the baseline yields an equilibrium price of **1.887** and a Profit Gain Index of **Δ = 0.991**. All four interventions reduce equilibrium prices but do not restore competitive outcomes (recovery rates range from **54.5%** (forced pricing) to **81.8%** (memory reset)).
 
 ---
 
