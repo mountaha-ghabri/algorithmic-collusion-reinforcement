@@ -108,7 +108,7 @@ Sensitivity grid across **9 parameter combinations**:
 | Profit Gain Index (Δ) | **0.991** |
 | Convergence (iterations) | 1.4 × 10⁶ |
 
-The impulse response replicates Calvano et al. Figure 3 — prices drop below Nash for ~3 periods (punishment phase) before returning to the collusive equilibrium by period 6.
+The impulse response replicates Calvano et al. Figure 3, prices drop below Nash for ~3 periods (punishment phase) before returning to the collusive equilibrium by period 6.
 
 ### Post-Intervention Results
 
@@ -121,7 +121,7 @@ The impulse response replicates Calvano et al. Figure 3 — prices drop below Na
 | Nash (R=0%) | 1.473 | 0.0 | — |
 | Baseline (R=100%) | 1.887 | 100.0 | — |
 
-> **Key finding:** All four interventions reduce collusion; none restore competitive pricing. The most disruptive intervention (forced pricing) still leaves agents at R = 54.5% — more than halfway back to collusion.
+> **Key finding:** All four interventions reduce collusion; none restore competitive pricing. The most disruptive intervention (forced pricing) still leaves agents at R = 54.5%, more than halfway back to collusion.
 
 ### Sensitivity Analysis
 
@@ -137,7 +137,7 @@ Once converged, Q-tables encode a reinforced collusive strategy. Interventions p
 
 ### Duration Insensitivity
 
-Forcing Nash pricing for 50 vs. 100 periods produces **identical outcomes** in this run. This suggests a possible threshold mechanism — once Q-value corruption crosses a critical level, extending enforcement adds little benefit.
+Forcing Nash pricing for 50 vs. 100 periods produces **identical outcomes** in this run. This suggests a possible threshold mechanism, once Q-value corruption crosses a critical level, extending enforcement adds little benefit.
 
 ### Symmetric vs. Asymmetric Interventions
 
@@ -145,9 +145,9 @@ The memory reset (asymmetric) achieves the **least disruption** (R = 81.8%). The
 
 ### Three Policy Conclusions
 
-1. **Reactive enforcement is not futile** — a decline from Δ = 0.991 to 0.55–0.82 represents a real consumer welfare gain
-2. **Symmetric enforcement outperforms targeted** — industry-wide audits or coordinated resets should produce larger disruptions than firm-specific remedies
-3. **Preventive approaches may dominate reactive ones** — algorithmic design requirements or ex-ante approval regimes could outperform post-detection enforcement
+1. **Reactive enforcement is not futile**: a decline from Δ = 0.991 to 0.55–0.82 represents a real consumer welfare gain
+2. **Symmetric enforcement outperforms targeted**: industry-wide audits or coordinated resets should produce larger disruptions than firm-specific remedies
+3. **Preventive approaches may dominate reactive ones**: algorithmic design requirements or ex-ante approval regimes could outperform post-detection enforcement
 
 ---
 
@@ -185,13 +185,13 @@ pip install numpy matplotlib seaborn pickle
 ### Run Order
 
 ```bash
-# Step 1 — Train baseline once and save converged game
+# Step 1: Train baseline once and save converged game
 python replication/scripts/script_01_baseline.py
 
-# Step 2 — Apply all four interventions and measure recovery rates
+# Step 2: Apply all four interventions and measure recovery rates
 python replication/scripts/script_02_interventions.py
 
-# Step 3 — Run sensitivity analysis across 3×3 parameter grid
+# Step 3: Run sensitivity analysis across 3×3 parameter grid
 python replication/scripts/script_03_sensitivity.py
 ```
 
@@ -215,9 +215,9 @@ beta = 4e-6     # Exploration decay
 
 ## Limitations
 
-- Headline intervention results are based on **one baseline training realisation** — interpret as run-specific, not population-level estimates
+- Headline intervention results are based on **one baseline training realisation**: interpret as run-specific, not population-level estimates
 - Interventions applied once in isolation; repeated or coordinated interventions may produce different dynamics
-- Sensitivity analysis uses only 3 sessions per cell — indicative rather than definitive
+- Sensitivity analysis uses only 3 sessions per cell; indicative rather than definitive
 - Model abstracts from entry, asymmetric costs, demand uncertainty, and multi-product competition
 
 ---
